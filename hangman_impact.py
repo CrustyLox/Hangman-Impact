@@ -896,4 +896,4 @@ while (menu_choice != "exit"):
                 choice_found = True
         if (not choice_found):
             print("ERROR: you must type either 'play','profile','shop','exit'")
-            #jojo is kinda coole
+            #jojo is kinda cool
