@@ -26,14 +26,54 @@ def slowprint_ad(s):
         sys.stdout.write(c)
         sys.stdout.flush()
         time.sleep(1./21)
-def add_money(money_count):
+def add_money(money_to_be_added):
+    global money
+    money = money + money_to_be_added
     with open('data.txt','w') as data_add:    
         data_add.write("user_info\n")
         data_add.write(user)
         data_add.write("\n")
         data_add.write(str(win) + "\n")
         data_add.write(rank + "\n")
-        data_add.write(str(int(money) + money_count) + "\n")
+        data_add.write(str(money) + "\n")
+        data_add.write(str(games) + "\n")
+        data_add.write("Inventory\n")
+def change_rank(rank_to_be_changed_to):
+    global rank
+    with open('data.txt','w')as data_add:
+        rank = rank_to_be_changed_to
+        data_add.write("user_info\n")
+        data_add.write(user)
+        data_add.write("\n")
+        data_add.write(str(win) + "\n")
+        data_add.write(rank + "\n")
+        data_add.write(str(money) + "\n")
+        data_add.write(str(games) + "\n")
+        data_add.write("Inventory\n")
+def add_win():
+    global win,games,money
+    win = win + 1
+    money = money + 5
+    games = games + 1
+    with open('data.txt','w')as data_add:
+        data_add.write("user_info\n")
+        data_add.write(user)
+        data_add.write("\n")
+        data_add.write(str(win) + "\n")
+        data_add.write(rank + "\n")
+        data_add.write(str(money) + "\n")
+        data_add.write(str(games) + "\n")
+        data_add.write("Inventory\n")
+def add_loss():
+    global games
+    games = games + 1
+    with open('data.txt','w')as data_add:
+        data_add.write("user_info\n")
+        data_add.write(user)
+        data_add.write("\n")
+        data_add.write(str(win) + "\n")
+        data_add.write(rank + "\n")
+        data_add.write(str(money) + "\n")
         data_add.write(str(games) + "\n")
         data_add.write("Inventory\n")
 def wheel():
@@ -47,15 +87,7 @@ def wheel():
                 wheel_value = wheel_items[i]
                 if (isinstance(wheel_value, int)):
                     print("You got " + str(wheel_value) + "$")
-                    with open('data.txt','w') as data_add:    
-                        data_add.write("user_info\n")
-                        data_add.write(user)
-                        data_add.write("\n")
-                        data_add.write(str(win) + "\n")
-                        data_add.write(rank + "\n")
-                        data_add.write(str(int(money) + wheel_value) + "\n")
-                        data_add.write(str(games) + "\n")
-                        data_add.write("Inventory\n")
+                    add_money(wheel_value)
                 if wheel_value == "drip":
                     print("You got free drip")
                     for i in inventory:
@@ -305,10 +337,10 @@ if (not file_exists):
 with open('data.txt','r') as profile:
             profile_contents = profile.readlines()
             user = profile_contents[1].strip()
-            win = profile_contents[2].strip()
+            win = int(profile_contents[2].strip())
             rank = profile_contents[3].strip()
-            money = profile_contents[4].strip()
-            games = profile_contents[5].strip()
+            money = int(profile_contents[4].strip())
+            games = int(profile_contents[5].strip())
             if len(profile_contents)>7:
                 for i in range(7,len(profile_contents)):
                     inventory.append(profile_contents[i].strip())
@@ -661,40 +693,7 @@ while (menu_choice != "exit"):
                 filled1 = False
         if filled1:
             print("You won")
-            with open('data.txt','r') as data_read:
-                data_contents = data_read.readlines()
-                user1 = data_contents[1]
-                ul = len(user1)-1
-                user = ""
-                for i in range(0,ul):
-                    user = user + user1[i]
-                win1 = data_contents[2]
-                wl = len(str(win1))-1
-                win = ""
-                for i in range(0,wl):
-                    win = win + win1[i]
-                    win = int(win) + 1
-                money1 = data_contents[4]
-                ml = len(str(money1))-1
-                money = ""
-                for i in range(0,ml):
-                    money = money + money1[i]
-                money = int(money) + 5
-                games1 = data_contents[5]
-                gl = len(str(games1))-1
-                games = ""  
-                for i in range(0,gl):
-                    games = games + games1[i]
-                games = int(games) + 1
-            with open('data.txt','w') as data_add:    
-                data_add.write("user_info\n")
-                data_add.write(user)
-                data_add.write("\n")
-                data_add.write(str(win) + "\n")
-                data_add.write(rank + "\n")
-                data_add.write(str(money) + "\n")
-                data_add.write(str(games) + "\n")
-                data_add.write("Inventory\n")
+            add_win()
         else:
             if (not drip):
                 print("+---+")
@@ -732,42 +731,7 @@ while (menu_choice != "exit"):
                 print("     |")
                 print(" =========")
             print("you lost, the word was:", word)
-            with open('data.txt','r') as data_read:
-                data_contents = data_read.readlines()
-                user1 = data_contents[1]
-                ul = len(user1)-1
-                user = ""
-                for i in range(0,ul):
-                    user = user + user1[i]
-                win1 = data_contents[2]
-                wl = len(str(win1))-1
-                win = ""
-                for i in range(0,wl):
-                    win = win + win1[i]
-                money1 = data_contents[4]
-                ml = len(str(money1))-1
-                money = ""
-                for i in range(0,ml):
-                    money = money + money1[i]
-                money = int(money)
-                games1 = data_contents[5]
-                gl = len(str(games1))-1
-                games = ""  
-                for i in range(0,gl):
-                    games = games + games1[i]
-                games = int(games) + 1
-            with open('data.txt','w') as data_add:    
-                data_add.write("user_info\n")
-                data_add.write(user)
-                data_add.write("\n")
-                data_add.write(str(win) + "\n")
-                data_add.write(rank + "\n")
-                data_add.write(str(money) + "\n")
-                data_add.write(str(games) + "\n")
-                data_add.write("Inventory\n")
-                if len(profile_contents) > 7:
-                    for i in range(7,len(profile_contents)):
-                        data_add.write(profile_contents[i])
+            add_loss()
         ad()
         menu_choice = input("Enter 'play' to play again, 'profile' to view your profile, 'inventory' for inventory, 'shop' for shop, or 'exit' to leave: ")
         for i in start_choices:
@@ -780,10 +744,10 @@ while (menu_choice != "exit"):
             profile_contents = profile.readlines()
         print("")
         print("")
-        print("Name: ",profile_contents[1],end = "")
-        print("Wins: ",profile_contents[2],end = "")
-        print("Rank: ",profile_contents[3],end = "")
-        print("Money: ",profile_contents[4],"$",end = "")
+        print("Name: ",user )
+        print("Wins: ",win,)
+        print("Rank: ",rank, )
+        print("Money: ",money,"$",)
         print("")
         print("")
         if len(profile_contents)>7:
@@ -820,33 +784,10 @@ while (menu_choice != "exit"):
                     crate_number_valid = True
                 else:
                     print("ERROR: you must enter a valid number")
-            with open('data.txt','r') as money_check:
-                 data_contents = money_check.readlines()
-            money_count1 = data_contents[4]
-            moneylen = len(money_count1)-1
-            money_count = ""
-            for i in range(0,moneylen):
-                money_count = money_count + money_count1[i]
-            money_count = int(money_count)
             crate_number = int(crate_number)
-            if money_count >= crate_number * 20:
-                money_count = money_count - crate_number*20
-                user1 = data_contents[1]
-                ul = len(user1)-1
-                user = ""   
-                for i in range(0,ul):
-                    user = user + user1[i]
-                win1 = data_contents[2]
-                wl = len(str(win1))-1
-                win = ""
-                for i in range(0,wl):
-                    win = win + win1[i]
-                games1 = data_contents[5]
-                gl = len(str(games1))-1
-                games = ""  
-                for i in range(0,gl):
-                    games = games + games1[i]
-                games = int(games)
+            crate_cost = crate_number * 20
+            if money >= crate_cost:
+                add_money(-crate_cost)
                 box_value_existance = False   
                 percentage = ""
                 for i in range(0,crate_number):
@@ -883,7 +824,7 @@ while (menu_choice != "exit"):
                     data_add.write("\n")
                     data_add.write(str(win) + "\n")
                     data_add.write(rank + "\n")
-                    data_add.write(str(money_count) + "\n")
+                    data_add.write(str(money) + "\n")
                     data_add.write(str(games) + "\n")
                     data_add.write("Inventory\n")
                     for i in range(0,inventorylen):
@@ -896,4 +837,4 @@ while (menu_choice != "exit"):
                 choice_found = True
         if (not choice_found):
             print("ERROR: you must type either 'play','profile','shop','exit'")
-            #jojo is kinda coolw
+            
