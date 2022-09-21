@@ -26,9 +26,27 @@ def slowprint_ad(s):
         sys.stdout.write(c)
         sys.stdout.flush()
         time.sleep(1./21)
+def add_inventory(inventory_earnt):
+    if inventory_earnt not in inventory:
+        inventory.append(inventory_earnt)
+        with open('data.txt','w') as data_add:
+            data_add.write("user_info\n")
+            data_add.write(user)
+            data_add.write("\n")
+            data_add.write(str(win) + "\n")
+            data_add.write(rank + "\n")
+            data_add.write(str(money) + "\n")
+            data_add.write(str(games) + "\n")
+            data_add.write("Inventory\n")
+            for i in inventory:
+                data_add.write(i)
+        
+        
 def add_money(money_to_be_added):
     global money
     money = money + money_to_be_added
+    if money < 0:
+        money = 0
     with open('data.txt','w') as data_add:    
         data_add.write("user_info\n")
         data_add.write(user)
@@ -90,6 +108,7 @@ def wheel():
                     add_money(wheel_value)
                 if wheel_value == "drip":
                     print("You got free drip")
+                    add_inventory(wheel_value)
                     for i in inventory:
                         if wheel_value == i:
                             wheel_value_existance = True
@@ -98,8 +117,6 @@ def wheel():
                 if wheel_value == "extralife":
                     print("you get an extra life every game")
                     extra_life = True
-            
-
             if wheel_choice == "no":
                  break   
 def ad():
@@ -837,4 +854,3 @@ while (menu_choice != "exit"):
                 choice_found = True
         if (not choice_found):
             print("ERROR: you must type either 'play','profile','shop','exit'")
-            
