@@ -9,15 +9,11 @@ from unicodedata import numeric
 from time import sleep
 # ele's code dont steal
 #things left to do:
-#shop for drip(done)
-#a function for advertisments(done)
-#ranks in game(done)
 #1v1 same terminal
 #money name
-#wheel
+#wheel(3/4)
 #hints
-#sudden death?
-#hint for smaller tasks(along)?
+#alongs ver - sudden death 1v1 + hints 
 menu_choice = ""
 import sys
 import time
@@ -26,6 +22,57 @@ def slowprint_ad(s):
         sys.stdout.write(c)
         sys.stdout.flush()
         time.sleep(1./21)
+def hangman_char():
+    if drip:
+        print(drip_choice)
+    if stage <= 0:
+        print(" +---+")
+        print(" |   |")
+        print("     |")
+        print("     |")
+        print("     |")
+        print("     |")
+        print(" =========")
+    elif stage == 1:
+        print(" +---+")
+        print(" |   |")
+        print(" o   |")
+        print("     |")
+        print("     |")
+        print("     |")
+        print(" =========")
+    elif stage == 2:
+        print(" +---+")
+        print(" |   |")
+        print(" o   |")
+        print(" |   |")
+        print("     |")
+        print("     |")
+        print(" =========")
+    elif stage == 3:
+        print("+---+")
+        print(" |   |")
+        print(" o   |")
+        print("/|   |")
+        print("     |")
+        print("     |")
+        print(" =========")
+    elif stage == 4:
+        print("+---+")
+        print(" |   |")
+        print(" o   |")
+        print("/|\  |")
+        print("     |")
+        print("     |")
+        print(" =========")
+    elif stage == 5:
+        print("+---+")
+        print(" |   |")
+        print(" o   |")
+        print("/|\  |")
+        print("/    |")
+        print("     |")
+        print(" =========")
 def add_inventory(inventory_earnt):
     if inventory_earnt not in inventory:
         inventory.append(inventory_earnt)
@@ -428,9 +475,8 @@ while (menu_choice != "exit"):
         while not valid:
             theme = input("Choose a theme amongst the given themes: ")
             found = False
-            for i in range(0, len(themes)):
-                if themes[i] == theme:
-                    valid = True
+            if theme in themes:
+                valid = True
             if not valid:
                 print("ERROR:enter a valid theme")
         if theme == "random":
@@ -451,216 +497,7 @@ while (menu_choice != "exit"):
         while (stage != 6) and (not filled):
             while not valid1:
                 if True:
-                    if stage <= 0 and (not drip):
-                        print(" +---+")
-                        print(" |   |")
-                        print("     |")
-                        print("     |")
-                        print("     |")
-                        print("     |")
-                        print(" =========")
-                    elif stage == 1 and (not drip):
-                        print(" +---+")
-                        print(" |   |")
-                        print(" o   |")
-                        print("     |")
-                        print("     |")
-                        print("     |")
-                        print(" =========")
-                    elif stage == 2 and (not drip):
-                        print(" +---+")
-                        print(" |   |")
-                        print(" o   |")
-                        print(" |   |")
-                        print("     |")
-                        print("     |")
-                        print(" =========")
-                    elif stage == 3 and (not drip):
-                        print("+---+")
-                        print(" |   |")
-                        print(" o   |")
-                        print("/|   |")
-                        print("     |")
-                        print("     |")
-                        print(" =========")
-                    elif stage == 4 and (not drip):
-                        print("+---+")
-                        print(" |   |")
-                        print(" o   |")
-                        print("/|\  |")
-                        print("     |")
-                        print("     |")
-                        print(" =========")
-                    elif stage == 5 and (not drip):
-                        print("+---+")
-                        print(" |   |")
-                        print(" o   |")
-                        print("/|\  |")
-                        print("/    |")
-                        print("     |")
-                        print(" =========")
-                    elif stage <= 0 and (drip_choice == "drip"):
-                        print("drip hangman")
-                        print(" +---+")
-                        print(" |   |")
-                        print("     |")
-                        print("     |")
-                        print("     |")
-                        print("     |")
-                        print(" =========")
-                    elif stage == 1 and (drip_choice == "drip"):
-                        print("drip hangman")
-                        print(" +---+")
-                        print(" |   |")
-                        print(" o   |")
-                        print("     |")
-                        print("     |")
-                        print("     |")
-                        print(" =========")
-                    elif stage == 2 and (drip_choice == "drip"):
-                        print("drip hangman")
-                        print(" +---+")
-                        print(" |   |")
-                        print(" o   |")
-                        print(" |   |")
-                        print("     |")
-                        print("     |")
-                        print(" =========")
-                    elif stage == 3 and (drip_choice == "drip"):
-                        print("drip hangman")
-                        print("+---+")
-                        print(" |   |")
-                        print(" o   |")
-                        print("/|   |")
-                        print("     |")
-                        print("     |")
-                        print(" =========")
-                    elif stage == 4 and (drip_choice == "drip"):
-                        print("drip hangman")
-                        print("+---+")
-                        print(" |   |")
-                        print(" o   |")
-                        print("/|\  |")
-                        print("     |")
-                        print("     |")
-                        print(" =========")
-                    elif stage == 5 and (drip_choice == "drip"):
-                        print("drip hangman")
-                        print("+---+")
-                        print(" |   |")
-                        print(" o   |")
-                        print("/|\  |")
-                        print("/    |")
-                        print("     |")
-                        print(" =========")
-                    elif stage <= 0 and (drip_choice == "common drip"):
-                        print("common drip hangman")
-                        print(" +---+")
-                        print(" |   |")
-                        print("     |")
-                        print("     |")
-                        print("     |")
-                        print("     |")
-                        print(" =========")
-                    elif stage == 1 and (drip_choice == "common drip"):
-                        print("common drip hangman")
-                        print(" +---+")
-                        print(" |   |")
-                        print(" o   |")
-                        print("     |")
-                        print("     |")
-                        print("     |")
-                        print(" =========")
-                    elif stage == 2 and (drip_choice == "common drip"):
-                        print("common drip hangman")
-                        print(" +---+")
-                        print(" |   |")
-                        print(" o   |")
-                        print(" |   |")
-                        print("     |")
-                        print("     |")
-                        print(" =========")
-                    elif stage == 3 and (drip_choice == "common drip"):
-                        print("common drip hangman")
-                        print("+---+")
-                        print(" |   |")
-                        print(" o   |")
-                        print("/|   |")
-                        print("     |")
-                        print("     |")
-                        print(" =========")
-                    elif stage == 4 and (drip_choice == "common drip"):
-                        print("common drip hangman")
-                        print("+---+")
-                        print(" |   |")
-                        print(" o   |")
-                        print("/|\  |")
-                        print("     |")
-                        print("     |")
-                        print(" =========")
-                    elif stage == 5 and (drip_choice == "common drip"):
-                        print("common drip hangman")
-                        print("+---+")
-                        print(" |   |")
-                        print(" o   |")
-                        print("/|\  |")
-                        print("/    |")
-                        print("     |")
-                        print(" =========")
-                    elif stage <= 0 and (drip_choice == "super rare drip"):
-                        print("super rare drip hangman")
-                        print(" +---+")
-                        print(" |   |")
-                        print("     |")
-                        print("     |")
-                        print("     |")
-                        print("     |")
-                        print(" =========")
-                    elif stage == 1 and (drip_choice == "super rare drip"):
-                        print("super rare drip hangman")
-                        print(" +---+")
-                        print(" |   |")
-                        print(" o   |")
-                        print("     |")
-                        print("     |")
-                        print("     |")
-                        print(" =========")
-                    elif stage == 2 and (drip_choice == "super rare drip"):
-                        print("super rare drip hangman")
-                        print(" +---+")
-                        print(" |   |")
-                        print(" o   |")
-                        print(" |   |")
-                        print("     |")
-                        print("     |")
-                        print(" =========")
-                    elif stage == 3 and (drip_choice == "super rare drip"):
-                        print("super rare drip hangman")
-                        print("+---+")
-                        print(" |   |")
-                        print(" o   |")
-                        print("/|   |")
-                        print("     |")
-                        print("     |")
-                        print(" =========")
-                    elif stage == 4 and (drip_choice == "super rare drip"):
-                        print("super rare drip hangman")
-                        print("+---+")
-                        print(" |   |")
-                        print(" o   |")
-                        print("/|\  |")
-                        print("     |")
-                        print("     |")
-                        print(" =========")
-                    elif stage == 5 and (drip_choice == "super rare drip"):
-                        print("super rare drip hangman")
-                        print("+---+")
-                        print(" |   |")
-                        print(" o   |")
-                        print("/|\  |")
-                        print("/    |")
-                        print("     |")
-                        print(" =========")
+                    hangman_char()
                 for i in blank:
                     print(i, end=" ")
                 print("")
@@ -673,6 +510,9 @@ while (menu_choice != "exit"):
                             char = char[11:]
                             stage = stage - int(char)
                             command = True
+                        elif "jojo is the best anime":
+                            for i in range (0,len(word)):
+                                word[i] = blank[i]
                         else:
                             stage = stage - 1
                             command = True
@@ -684,17 +524,13 @@ while (menu_choice != "exit"):
                         valid1 = False
                     if not valid1:
                         print("ERROR:you must enter only one letter which is part of the alphabets")
-                    if valid:
-                        for i in repeated_letters:
-                            if i == char:
-                                valid1 = False
-                                repeat = True
-                        if repeat == True:
+                    if char in repeated_letters:
                             print("ERROR: you have already entered this letter")
             for i in range(0, len(word)):
                 if word[i] == char:
                     blank[i] = char
                     found = True
+                    repeated_letters.append(char)
             if not found:
                 repeated_letters.append(char)
                 stage = stage + 1
@@ -711,51 +547,34 @@ while (menu_choice != "exit"):
         if filled1:
             print("You won")
             add_win()
+            if rank != "Owner":
+                if win >=5 and win < 10:
+                    change_rank("Rookie")
         else:
-            if (not drip):
-                print("+---+")
-                print(" |   |")
-                print(" o   |")
-                print("/|\  |")
-                print("/ \  |")
-                print("     |")
-                print(" =========")
-            elif (drip_choice == "drip"):
-                print("drip hangman")
-                print("+---+")
-                print(" |   |")
-                print(" o   |")
-                print("/|\  |")
-                print("/ \  |")
-                print("     |")
-                print(" =========")
-            elif (drip_choice == "common drip"):
-                print("common drip hangman")
-                print("+---+")
-                print(" |   |")
-                print(" o   |")
-                print("/|\  |")
-                print("/ \  |")
-                print("     |")
-                print(" =========")
-            elif (drip_choice == "super rare drip"):
-                print("super rare drip hangman")
-                print("+---+")
-                print(" |   |")
-                print(" o   |")
-                print("/|\  |")
-                print("/ \  |")
-                print("     |")
-                print(" =========")
-            print("you lost, the word was:", word)
+            if (drip):
+                print(drip_choice)
+
+            print("+---+")
+            print(" |   |")
+            print(" o   |")
+            print("/|\  |")
+            print("/ \  |")
+            print("     |")
+            print(" =========")
+            if theme == "random":
+                print("you lost, the word was: ", word)
+            if theme == "movies":
+                print("you lost, the movie was: ", word)
+            if theme == "video games":
+                print("you lost, the game was: ",word )
             add_loss()
         ad()
-        menu_choice = input("Enter 'play' to play again, 'profile' to view your profile, 'inventory' for inventory, 'shop' for shop, or 'exit' to leave: ")
+        menu_choice = input("Enter 'play' to play again, 'profile' to view your profile, 'shop' for shop, or 'exit' to leave: ")
         for i in start_choices:
             if i == menu_choice:
                 choice_found = True
         if (not choice_found):
-            print("ERROR: you must type either 'play','profile','inventory','shop','exit'")
+            print("ERROR: you must type either 'play','profile', 'shop','exit'")
     if menu_choice == "profile":
         with open('data.txt','r') as profile:
             profile_contents = profile.readlines()
