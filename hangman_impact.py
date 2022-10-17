@@ -897,6 +897,24 @@ def game_board_formation():
     print(board[1] + "|" + board[2] + "|" + board[3])
     print(board[4] + "|" + board[5] + "|" + board[6])
     print(board[7] + "|" + board[8] + "|" + board[9])
+def game_draw_check():
+    global games1, games2
+    if " " not in board:
+        games1 = games1 + 1
+        games2 = games2 + 1
+        with open(username_1 + '_profile.txt','w')as data_add:
+            data_add.write("user_info\n")
+            data_add.write(username_1)
+            data_add.write("\n")
+            data_add.write(str(win1) + "\n")
+            data_add.write(str(games1) + "\n")
+        with open(username_2 + '_profile.txt','w')as data_add:
+            data_add.write("user_info\n")
+            data_add.write(username_2)
+            data_add.write("\n")
+            data_add.write(str(win2) + "\n")
+            data_add.write(str(games2) + "\n")
+        return True
 def game_win_check():
     Game = False
     if(board[1] == board[2] and board[2] == board[3] and board[1] != ' '):    
@@ -1035,4 +1053,7 @@ while (not Game_over):
         Game_over = True
         add_win(2)
         break
+    if (game_draw_check):
+        Game_over = True
+        print("Draw")
 end = input("Press Enter to leave")
