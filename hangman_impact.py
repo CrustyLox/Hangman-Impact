@@ -853,3 +853,49 @@ while (menu_choice != "exit"):
                 choice_found = True
         if (not choice_found):
             print("ERROR: you must type either 'play','profile','shop','exit'")
+mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm
+def game_board_formation():
+    print(board[1] + "|" + board[2] + "|" + board[3])
+    print(board[4] + "|" + board[5] + "|" + board[6])
+    print(board[7] + "|" + board[8] + "|" + board[9])
+def game_win_check():
+    if(board[1] == board[2] and board[2] == board[3] and board[1] != ' '):    
+        Game = Win    
+    elif(board[4] == board[5] and board[5] == board[6] and board[4] != ' '):    
+        Game = Win    
+    elif(board[7] == board[8] and board[8] == board[9] and board[7] != ' '):    
+        Game = Win       
+    elif(board[1] == board[4] and board[4] == board[7] and board[1] != ' '):    
+        Game = Win    
+    elif(board[2] == board[5] and board[5] == board[8] and board[2] != ' '):    
+        Game = Win    
+    elif(board[3] == board[6] and board[6] == board[9] and board[3] != ' '):    
+        Game=Win        
+    elif(board[1] == board[5] and board[5] == board[9] and board[5] != ' '):    
+        Game = Win    
+    elif(board[3] == board[5] and board[5] == board[7] and board[5] != ' '):    
+        Game=Win
+    if Game == Win:
+        print("gameover")
+start = input("Press Enter to start the game")
+Game_over = False
+board = [" "," "," "," "," "," "," "," "," "," "]
+print("1|2|3")
+print("4|5|6")
+print("7|8|9")
+print("Rules***")
+while (not Game_over):
+    counter = int(input("player 1 enter your number"))
+    if game_board[counter] != " ":
+        print("ERROR: there is already a value in that spot")
+    else:
+        game_board[counter] = "X"
+    game_board_formation()
+    game_win_check()
+    counter = int(input("player 2 enter your number"))
+    if game_board[counter] != " ":
+        print("ERROR: there is already a value in that spot")
+    else:
+        game_board[counter] = "O"
+    game_board_formation()
+    game_win_check()
